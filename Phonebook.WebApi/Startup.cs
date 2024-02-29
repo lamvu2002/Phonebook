@@ -35,8 +35,18 @@ public class Startup
         services.AddCacheServices();
 
         // Security
-        services.AddCors();
-
+        //services.AddCors();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowReactApp",
+              builder =>
+              {
+                  builder.WithOrigins("http://localhost:3000") // Replace with your React app origin
+                         .AllowAnyMethod()
+                         .AllowAnyHeader()
+                         .AllowCredentials(); // Enable credentials
+              });
+        });
         // Intergrate authenticate
         //ket noi xuong db
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PhonebookDbConn")));
@@ -80,11 +90,12 @@ public class Startup
         app.UseAuthentication();
 
         app.UseAuthorization();
-        app.UseCors(configurePolicy: option =>
-        {
-            option.WithMethods("GET", "POST", "PUT", "DELETE");
-            option.WithOrigins("http://localhost:5037");
-        });
+        //app.UseCors(configurePolicy: option =>
+        //{
+        //    option.WithMethods("GET", "POST", "PUT", "DELETE");
+        //    option.WithOrigins("http://localhost:5122");
+        //});
+        app.UseCors("AllowReactApp");
 
         app.UseEndpoints(endpoints =>
         {

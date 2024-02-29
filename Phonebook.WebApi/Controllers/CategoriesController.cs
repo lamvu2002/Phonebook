@@ -7,7 +7,7 @@ using Phonebook.Caching.Common;
 using Phonebook.IdentityJWT.Authentication;
 namespace Phonebook.WebApi.Controllers;
 
-//[Authorize(Roles = UserRoles.AdminRole)]
+[Authorize(Roles = UserRoles.AdminRole)]
 [ApiController]
 [Route("api/[controller]")]
 public class CategoriesController : ControllerBase
