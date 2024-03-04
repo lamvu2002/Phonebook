@@ -51,7 +51,7 @@ public class Startup
         //ket noi xuong db
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PhonebookDbConn")));
         // for identity
-        services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+        services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
         // add authentication
         services.AddAuthentication(options =>
         {
@@ -66,6 +66,10 @@ public class Startup
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ClockSkew = TimeSpan.Zero,
+
                 ValidAudience = Configuration["JWT:ValidAudience"],
                 ValidIssuer = Configuration["JWT:ValidIssuer"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
@@ -83,6 +87,7 @@ public class Startup
         {
             app.UseHsts();
         }
+        app.UseCors("AllowReactApp");
         app.UseMiddleware<SecurityHeader>();
         app.UseHttpsRedirection();
         app.UseRouting();
@@ -95,7 +100,7 @@ public class Startup
         //    option.WithMethods("GET", "POST", "PUT", "DELETE");
         //    option.WithOrigins("http://localhost:5122");
         //});
-        app.UseCors("AllowReactApp");
+        
 
         app.UseEndpoints(endpoints =>
         {

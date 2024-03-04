@@ -29,6 +29,7 @@ public static class PhonebookContextServiceExtensions
         services.AddScoped<IContactService, ContactService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ISubcategoryService, SubcategoryService>();
+        services.AddScoped<IUserService, UserService>();
         return services;
     }
 }
