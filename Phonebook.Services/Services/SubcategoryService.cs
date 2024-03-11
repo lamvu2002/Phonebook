@@ -87,9 +87,9 @@ public class SubcategoryService : DataServiceBase<Subcategory>, ISubcategoryServ
 
     private async Task _loadAllSubcategoryToCached()
     {
-        var Subcategorys = await UnitOfWork.Repository<Subcategory>().Entities.ToListAsync();
+        var Subcategories = await UnitOfWork.Repository<Subcategory>().Entities.ToListAsync();
         string key = string.Empty;
-        foreach (var p in Subcategorys)
+        foreach (var p in Subcategories)
         {
             key = dataCached.GetKey(p, p => p.SubcategoryId).ToLower();
             if (!dataCached.IsSet(key))

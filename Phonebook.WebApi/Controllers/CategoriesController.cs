@@ -7,7 +7,7 @@ using Phonebook.Caching.Common;
 using Phonebook.IdentityJWT.Authentication;
 namespace Phonebook.WebApi.Controllers;
 
-[Authorize(Roles = UserRoles.AdminRole)]
+
 [ApiController]
 [Route("api/[controller]")]
 public class CategoriesController : ControllerBase
@@ -70,6 +70,7 @@ public class CategoriesController : ControllerBase
     }
     //4.update
     //PUT : api/Categories/[id]
+    [Authorize(Roles = UserRoles.AdminRole)]
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
@@ -90,6 +91,7 @@ public class CategoriesController : ControllerBase
     }
     //5.Delete
     //DELETE: api/Categories/[id]
+    [Authorize(Roles = UserRoles.AdminRole)]
     [HttpDelete("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]

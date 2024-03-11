@@ -154,7 +154,7 @@ public class AuthenticateController : ControllerBase
             return Ok(new
             {
                 token = encodedToken,
-                RefreshToken = refreshToken,
+                refreshtoken = refreshToken,
                 expiration = tokenValue.ValidTo
             });
         }
