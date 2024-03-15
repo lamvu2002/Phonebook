@@ -66,13 +66,11 @@ public partial class PhonebookContext : DbContext
 
         modelBuilder.Entity<Contact>(entity =>
         {
-            entity.HasKey(e => e.ContactId).HasName("PK__Contact__5C6625BBD1F07750");
+            entity.HasKey(e => e.ContactId).HasName("PK__Contact__5C6625BB98D4BC3B");
 
-            entity.Property(e => e.ContactId).ValueGeneratedNever();
+            entity.HasOne(d => d.Category).WithMany(p => p.Contacts).HasConstraintName("FK__Contact__Categor__0E6E26BF");
 
-            entity.HasOne(d => d.Category).WithMany(p => p.Contacts).HasConstraintName("FK__Contact__Categor__3C69FB99");
-
-            entity.HasOne(d => d.Subcategory).WithMany(p => p.Contacts).HasConstraintName("FK__Contact__Subcate__3D5E1FD2");
+            entity.HasOne(d => d.Subcategory).WithMany(p => p.Contacts).HasConstraintName("FK__Contact__Subcate__0F624AF8");
         });
 
         modelBuilder.Entity<Subcategory>(entity =>
