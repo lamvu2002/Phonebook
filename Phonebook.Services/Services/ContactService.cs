@@ -73,7 +73,7 @@ public class ContactService : DataServiceBase<Contact>, IContactService
     {
         string name = typeof(Contact).Name.ToLower();
         string keyAll = string.Format(CachingCommonDefaults.AllCacheKey, name);
-        //1. check if data exists
+        //1. check if data exists, if not load all data to cache
         if (!dataCached.IsSet(keyAll) || !(bool)dataCached.Get(keyAll))
         {
             await _loadAllContactToCached();

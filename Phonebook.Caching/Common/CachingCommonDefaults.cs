@@ -2,9 +2,9 @@
 
 public static partial class CachingCommonDefaults
 {
-    public static int CacheTime = 15;
+    public static int CacheTime = 5;
 
-    public static string CacheKey => "solid.ecommerce.{0}.id.{1}";
-    public static string AllCacheKey => "solid.ecommerce.{0}.all";
-    public static string CacheKeyHeader => "solid.ecommerce.{0}";
+    public static string CacheKey => "phonebook.{0}.id.{1}";
+    public static string AllCacheKey => "phonebook.{0}.all";
+    public static string CacheKeyHeader => "phonebook.{0}";
 }
