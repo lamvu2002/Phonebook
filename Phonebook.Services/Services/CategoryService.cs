@@ -71,7 +71,7 @@ public class CategoryService : DataServiceBase<Category>, ICategoryService
 
     public override async Task<IList<Category>> GetAllAsync()
     {
-        string name = typeof(Category).Name.ToLower();
+        string name = typeof(Category).Name;
         string keyAll = string.Format(CachingCommonDefaults.AllCacheKey, name);
         //1. check if data exists
         if (!dataCached.IsSet(keyAll) || !(bool)dataCached.Get(keyAll))
@@ -91,7 +91,7 @@ public class CategoryService : DataServiceBase<Category>, ICategoryService
         string key = string.Empty;
         foreach (var p in Categorys)
         {
-            key = dataCached.GetKey(p, p => p.CategoryId).ToLower();
+            key = dataCached.GetKey(p, p => p.CategoryId);
             if (!dataCached.IsSet(key))
                 dataCached.Set(key, p, CachingCommonDefaults.CacheTime);
         }
@@ -102,7 +102,7 @@ public class CategoryService : DataServiceBase<Category>, ICategoryService
     {
         try
         {
-            string key = string.Format(CachingCommonDefaults.CacheKey, typeof(Category).Name.ToLower(), id);
+            string key = string.Format(CachingCommonDefaults.CacheKey, typeof(Category).Name, id);
             if (dataCached.IsSet(key))
                 return await Task.FromResult(dataCached.GetT<Category>(key));
             Category? p = await UnitOfWork.Repository<Category>().FindAsync(id!);

@@ -16,7 +16,7 @@ public class UserService : DataServiceBase<AspNetUser>, IUserService
 
     public override async Task<IList<AspNetUser>> GetAllAsync()
     {
-        string name = typeof(AspNetUser).Name.ToLower();
+        string name = typeof(AspNetUser).Name;
         string keyAll = string.Format(CachingCommonDefaults.AllCacheKey, name);
         //1. check if data exists
         if (!dataCached.IsSet(keyAll) || !(bool)dataCached.Get(keyAll))
@@ -36,7 +36,7 @@ public class UserService : DataServiceBase<AspNetUser>, IUserService
         string key = string.Empty;
         foreach (var p in Users)
         {
-            key = dataCached.GetKey(p, p => p.Id).ToLower();
+            key = dataCached.GetKey(p, p => p.Id);
             if (!dataCached.IsSet(key))
                 dataCached.Set(key, p, CachingCommonDefaults.CacheTime);
         }

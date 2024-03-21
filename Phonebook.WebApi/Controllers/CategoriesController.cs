@@ -47,6 +47,7 @@ public class CategoriesController : ControllerBase
     }
     // POST: api/Categories/(json/xml)
     // 3. using post method
+    [Authorize(Roles = UserRoles.AdminRole)]
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(Category))]
     [ProducesResponseType(400)]

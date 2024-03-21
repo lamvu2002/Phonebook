@@ -71,7 +71,7 @@ public class SubcategoryService : DataServiceBase<Subcategory>, ISubcategoryServ
 
     public override async Task<IList<Subcategory>> GetAllAsync()
     {
-        string name = typeof(Subcategory).Name.ToLower();
+        string name = typeof(Subcategory).Name;
         string keyAll = string.Format(CachingCommonDefaults.AllCacheKey, name);
         //1. check if data exists
         if (!dataCached.IsSet(keyAll) || !(bool)dataCached.Get(keyAll))
@@ -91,7 +91,7 @@ public class SubcategoryService : DataServiceBase<Subcategory>, ISubcategoryServ
         string key = string.Empty;
         foreach (var p in Subcategories)
         {
-            key = dataCached.GetKey(p, p => p.SubcategoryId).ToLower();
+            key = dataCached.GetKey(p, p => p.SubcategoryId);
             if (!dataCached.IsSet(key))
                 dataCached.Set(key, p, CachingCommonDefaults.CacheTime);
         }
@@ -102,7 +102,7 @@ public class SubcategoryService : DataServiceBase<Subcategory>, ISubcategoryServ
     {
         try
         {
-            string key = string.Format(CachingCommonDefaults.CacheKey, typeof(Subcategory).Name.ToLower(), id);
+            string key = string.Format(CachingCommonDefaults.CacheKey, typeof(Subcategory).Name, id);
             if (dataCached.IsSet(key))
                 return await Task.FromResult(dataCached.GetT<Subcategory>(key));
             Subcategory? p = await UnitOfWork.Repository<Subcategory>().FindAsync(id!);

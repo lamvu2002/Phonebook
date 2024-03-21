@@ -46,7 +46,8 @@ public class ContactsController : ControllerBase
         }
     }
     // POST: api/Contacts/(json/xml)
-    // 3. using post method
+    // 3. Add
+    [Authorize(Roles = UserRoles.AdminRole)]
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(Contact))]
     [ProducesResponseType(400)]

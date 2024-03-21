@@ -71,7 +71,7 @@ public class ContactService : DataServiceBase<Contact>, IContactService
 
     public override async Task<IList<Contact>> GetAllAsync()
     {
-        string name = typeof(Contact).Name.ToLower();
+        string name = typeof(Contact).Name;
         string keyAll = string.Format(CachingCommonDefaults.AllCacheKey, name);
         //1. check if data exists, if not load all data to cache
         if (!dataCached.IsSet(keyAll) || !(bool)dataCached.Get(keyAll))
@@ -91,7 +91,7 @@ public class ContactService : DataServiceBase<Contact>, IContactService
         string key = string.Empty;
         foreach (var p in Contacts)
         {
-            key = dataCached.GetKey(p, p => p.ContactId).ToLower();
+            key = dataCached.GetKey(p, p => p.ContactId);
             if (!dataCached.IsSet(key))
                 dataCached.Set(key, p, CachingCommonDefaults.CacheTime);
         }
@@ -102,7 +102,7 @@ public class ContactService : DataServiceBase<Contact>, IContactService
     {
         try
         {
-            string key = string.Format(CachingCommonDefaults.CacheKey, typeof(Contact).Name.ToLower(), id);
+            string key = string.Format(CachingCommonDefaults.CacheKey, typeof(Contact).Name, id);
             if (dataCached.IsSet(key))
                 return await Task.FromResult(dataCached.GetT<Contact>(key));
             Contact? p = await UnitOfWork.Repository<Contact>().FindAsync(id!);

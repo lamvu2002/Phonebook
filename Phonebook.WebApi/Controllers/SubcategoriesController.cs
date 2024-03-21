@@ -47,6 +47,7 @@ public class SubcategoriesController : ControllerBase
     }
     // POST: api/Subcategories/(json/xml)
     // 3. using post method
+    [Authorize(Roles = UserRoles.AdminRole)]
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(Subcategory))]
     [ProducesResponseType(400)]
