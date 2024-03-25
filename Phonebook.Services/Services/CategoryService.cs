@@ -1,9 +1,8 @@
 ﻿using Phonebook.Caching;
-using System.Runtime.CompilerServices;
+
 using Phonebook.Caching.Common;
 using Phonebook.Caching.Extensions;
-using Castle.Components.DictionaryAdapter.Xml;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace Phonebook.Services.Services;
 
 public class CategoryService : DataServiceBase<Category>, ICategoryService

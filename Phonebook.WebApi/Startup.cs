@@ -2,8 +2,6 @@
 using Phonebook.Caching.Extensions;
 using Phonebook.Services.Extensions;
 using Phonebook.WebApi.Security;
-using Microsoft.EntityFrameworkCore;
-using Phonebook.Shared;
 using Phonebook.IdentityJWT.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -95,11 +93,7 @@ public class Startup
         app.UseAuthentication();
 
         app.UseAuthorization();
-        //app.UseCors(configurePolicy: option =>
-        //{
-        //    option.WithMethods("GET", "POST", "PUT", "DELETE");
-        //    option.WithOrigins("http://localhost:5122");
-        //});
+        
         
 
         app.UseEndpoints(endpoints =>
